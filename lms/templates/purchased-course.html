@@ -4,518 +4,636 @@
 
 
 <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Course Page</title>
- 
-  <link rel="stylesheet" href="{% static 'style.css' %}">
-      <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-      crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400;0,700;1,400;1,700&family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap"
-    rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Course Page</title>
 
-
+<link rel="stylesheet" href="{% static 'style.css' %}">
+<link rel="stylesheet" href="{% static 'sass/reg-course-style.css' %}">
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+  integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+  integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+<link
+  href="https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400;0,700;1,400;1,700&family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+  rel="stylesheet">
 {% endblock %}
 
 
 
 {% block content %}
 
-  <!-- videoSection -->
-  <section class="container-fluid" id="videoSection">
-    <div class="row no-gutters">
-      <!-- Course content  -->
-      <div class="col-12 col-lg-4 sidebar d-none d-lg-block" id="courseContent">
-        <div id="contentHeading sidebar-header">
-          <h4 class="contentHead p-2">Course content</h4>
-        </div>
-        <div id="accordion" class="">
-          {% for i in object.module_set.all %}
-          <!-- Chapter 1  -->
-          {% if i.id == 1 %}
-          <div class="card">
-            <div class="card-header panel-title pt-3" id="heading1">
-
-              <a class="collapsed" role="button" title="" data-toggle="collapse" href="#collapse1" aria-expanded="false"
-                aria-controls="collapse1" data-parent="#accordion">
-                <div class="row px-3">
-                  <div class="col-10 col-md-11">
-                    <h6>
-                      Section {{forloop.counter}}: {{i.module}}
-                    </h6>
-                    <p class="time">1 / 2 | {{i.duration}}min</p>
-                  </div>
-                  <div class="col-2 col-md-1 mr-auto">
-                    <!-- Closed Card  -->
-                    <i class="fas fa-angle-up"></i>
-                  </div>
-                </div>
-
-              </a>
-            </div>
-            
-            <div id="collapse1" class="panel-collapse show px-3 collapse" aria-labelledby="heading1">
-              <div class="card-body ml-2">
-                {% for j in i.lesson_set.all %}
-                <div class="topic">
-                  <input type="checkbox" class="form-check-input styled" id="video1" checked disabled>
-                  <label class="form-check-label" for="video1">{{forloop.counter}}. {{j.lesson}}</label>
-                  <p><i class="far fa-play-circle pr-2" aria-hidden="true"></i>{{j.duration}} min</p>
-                </div>
-                {% endfor %}
-              </div>
-            </div>
-          </div>
-          {% else %}
-          
-          <!-- Chapter 2  -->
-          <div class="card">
-            <div class="card-header panel-title pt-3" id="heading2">
-
-              <a class="collapsed" role="button" title="" data-toggle="collapse" href="#collapse{{i.id}}" aria-expanded="false"
-                aria-controls="collapse2" data-parent="#accordion">
-                <div class="row px-3">
-                  <div class="col-10 col-md-11">
-                    <h6>
-                      Section {{forloop.counter}}: {{i.module}}
-                    </h6>
-                    <p class="time">3 / 4 | {{i.duration}}min</p>
-                  </div>
-                  <div class="col-2 col-md-1 mr-auto">
-                    <!-- Closed Card  -->
-                    <i class="fas fa-angle-down"></i>
-                  </div>
-                </div>
-
-              </a>
-            </div>
-
-            <div id="collapse{{i.id}}" class="panel-collapse collapse px-3" aria-labelledby="heading2">
-              <div class="card-body ml-2">
-                {% for j in i.lesson_set.all %}
-                <div class="topic">
-                  <input type="checkbox" class="form-check-input" id="video3" checked disabled>
-                  <label class="form-check-label" for="video3">{{forloop.counter}}. {{j.lesson}}</label>
-                  <p><i class="far fa-play-circle pr-2" aria-hidden="true"></i>{{j.duration}} min</p>
-                </div>
-                {% endfor %}
-                
-              </div>
-            </div>
-          </div>
-
-          {% endif %}
-          {% endfor %}
-          <!-- Chapter 3  -->
-          
-        </div>
+<!-- videoSection -->
+<section class="container-fluid" id="videoSection">
+  <div class="row no-gutters">
+    <!-- Course content  -->
+    <div id="sticky-anchor"></div>
+    <div class="col-12 col-lg-4 sidebar d-none d-lg-block sticked" id="courseContent">
+      <div id="contentHeading sidebar-header">
+        <h4 class="contentHead p-2">Course content</h4>
       </div>
-      <!-- Video  -->
-      <div class="col-12 col-lg-8 px-0 pt-3 py-2 mt-0 ml-lg-auto">
+      <div id="accordion" class="">
+        {% for i in object.module_set.all %}
+        <!-- Chapter 1  -->
+        {% if i.id == 1 %}
+        <div class="card">
+          <div class="card-header panel-title pt-3" id="heading1">
 
-        <div class="embed-responsive embed-responsive-16by9">
-          <iframe width="560" height="315" src="https://www.youtube.com/embed/8N5rRU6JjFY" frameborder="0"
-            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-            class="embed-responsive-item" allowfullscreen></iframe>
-        </div>
-
-      </div>
-      
-
-      <!-- Course Tabs Section  -->
-      <div class="col-12 col-lg-8 ml-lg-auto course-tabs">
-        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-          <li class="nav-item">
-            <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab"
-              aria-controls="pills-home" aria-selected="true">Overview</a>
-          </li>
-          <li class="nav-item d-block d-lg-none">
-            <a class="nav-link" id="pills-content-tab" data-toggle="pill" href="#pills-content" role="tab"
-              aria-controls="pills-content" aria-selected="true">Course Content</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab"
-              aria-controls="pills-profile" aria-selected="false">Q&A</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" id="pills-anno-tab" data-toggle="pill" href="#pills-anno" role="tab"
-              aria-controls="pills-anno" aria-selected="false">Ask A Question</a>
-          </li>
-        </ul>
-
-        <div class="tab-content px-2 px-md-5" id="pills-tabContent">
-          <!-- Overview -->
-          <div class="tab-pane fade show active text-justify" id="pills-home" role="tabpanel"
-            aria-labelledby="pills-home-tab">
-            <div class="row">
-              <div class="col-12">
-                <div class="about">
-                  <h4>About this course</h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Repudiandae facere quas, fugit nam, illum
-                    ullam vero, quos ducimus necessitatibus molestias veniam labore ab delectus voluptatum autem magnam
-                    earum sit obcaecati culpa numquam. Itaque quo maxime facere facilis quibusdam natus doloremque!</p>
+            <a class="collapsed" role="button" title="" data-toggle="collapse" href="#collapse1" aria-expanded="false"
+              aria-controls="collapse1" data-parent="#accordion">
+              <div class="row px-3">
+                <div class="col-10 col-md-11">
+                  <h6>
+                    Section {{forloop.counter}}: {{i.module}}
+                  </h6>
+                  <p class="time">{{i.duration}} min</p>
                 </div>
-                <hr class="mt-3 mb-3">
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-4">
-                <h4>By the numbers</h4>
-              </div>
-              <div class="col-md-4">
-                <p>Skill level: Beginner Level</p>
-                <p>Students: 535072</p>
-                <p>Languages: English</p>
-                <p>Captions: Yes</p>
-              </div>
-              <div class="col-md-4">
-                <p>Lectures: 28</p>
-                <p>Video: 2.5 total hours</p>
-              </div>
-            </div>
-            <hr class="mt-3 mb-3">
-            <div class="Description">
-              <div class="row">
-                <div class="col-md-4">
-                  <h4>Description</h4>
-                </div>
-                <div class="col-md-8">
-                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit magnam unde laudantium, autem
-                    provident veritatis facere quis hic nam atque sunt porro, distinctio labore odit nostrum in,
-                    necessitatibus et. Natus cum exercitationem, libero aut suscipit expedita autem? Iusto accusantium
-                    sint aperiam? Explicabo laboriosam facilis iusto at dolore quod hic suscipit. Consequuntur
-                    dignissimos repellat, fugiat mollitia eum laborum quidem accusantium expedita perspiciatis placeat,
-                    provident iure, maxime debitis eius esse minima aspernatur. Optio officia quod quam quos eos ad
-                    pariatur, officiis sunt!</p>
+                <div class="col-2 col-md-1 mr-auto">
+                  <!-- Closed Card  -->
+                  <i class="fas fa-angle-up"></i>
                 </div>
               </div>
-            </div>
-            <hr class="mt-3 mb-3">
-            <div class="Instructor">
-              <div class="row">
-                <div class="col-md-4">
-                  <h4>Instructor</h4>
-                </div>
-                <div class="col-md-8">
-                  <div class="row text-center">
-                    <div class="col-md-4">
-                      <img class="heroImg" src="{% static 'img/hero01.jpg' %}">
-                    </div>
 
-                    <div class="col-md-8 mt-4">
-                      <h6>Avinash Jain</h6>
-                      <p>Python Trainer</p>
-                    </div>
-                  </div>
-
-                  <p class="mt-3"> Avinash Jain is currently a sophomore at UC Berkeley majoring in Electrical
-                    Engineering and
-                    Computer Science. He's the CEO and Founder of TheCodex, an online educational platform focused on
-                    bringing the best programming content to hundreds of thousands of students around the world.
-
-                    His programming journey began at the age of 10, starting off with simple Python scripts to crawl the
-                    weather. Since then, he's worked at numerous companies and is professionally experienced in Python,
-                    iOS Development and Web Development. He's launched a plethora of applications in the App Store
-                    amassing thousands of downloads. Additionaly, he's competed and won in several hackathons around the
-                    world including PennApps and NWHacks.
-
-                    Avinash has a passion to teach - his enthusiasm and love for programming is evident in every video.
-                    For the past 4 years he's been an instructor on Udemy and he loves motivating and enabling others to
-                    pursue their programming dreams. He hopes to help students realize the power of programming and
-                    jumpstart their careers through his courses.</p>
-                </div>
-              </div>
-            </div>
+            </a>
           </div>
-          <!-- Course Content  -->
-          <div class="tab-pane fade" id="pills-content" role="tabpanel" aria-labelledby="pills-content-tab">
-            <!-- Mobile Content View  -->
-            <div id="accordionMobile" class="">
-              <!-- Chapter 1  -->
-              <div class="card">
-                <div class="card-header panel-title pt-3" id="headingMobile1">
 
-                  <a class="collapsed" role="button" title="" data-toggle="collapse" data-parent="#accordionMobile"
-                    href="#collapseMobile1" aria-expanded="false" aria-controls="collapseMobile1">
-                    <div class="row px-3">
-                      <div class="col-10 col-md-11">
-                        <h6>
-                          Section 1: Up And Running With Python
-                        </h6>
-                        <p class="time">1 / 2 | 2min</p>
-                      </div>
-                      <div class="col-2 col-md-1 mr-auto">
-                        <!-- Closed Card  -->
-                        <i class="fas fa-angle-up"></i>
-                      </div>
-                    </div>
-
-                  </a>
-                </div>
-
-                <div id="collapseMobile1" class="panel-collapse collapse show px-3" aria-labelledby="headingMobile1"
-                  data-parent="#accordionMobile">
-                  <div class="card-body ml-2">
-                    <div class="topic">
-                      <input type="checkbox" class="form-check-input styled" id="video1" checked disabled>
-                      <label class="form-check-label" for="video1">1. Welcome!</label>
-                      <p><i class="far fa-play-circle pr-2" aria-hidden="true"></i>4 min</p>
-                    </div>
-                    <div class="topic">
-                      <input type="checkbox" class="form-check-input" id="video2" checked disabled>
-                      <label class="form-check-label" for="video2">2. Quick Resource to Jumpstart your Python
-                        Programming Journey</label>
-                      <p><i class="far fa-play-circle pr-2" aria-hidden="true"></i>4 min</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!-- Chapter 2  -->
-              <div class="card">
-                <div class="card-header panel-title pt-3" id="headingMobile2">
-
-                  <a class="collapsed" role="button" title="" data-toggle="collapse" data-parent="#accordionMobile"
-                    href="#collapseMobile2" aria-expanded="false" aria-controls="collapseMobile2">
-                    <div class="row px-3">
-                      <div class="col-10 col-md-11">
-                        <h6>
-                          Section 2: All the Basics(New)
-                        </h6>
-                        <p class="time">3 / 4 | 16min</p>
-                      </div>
-                      <div class="col-2 col-md-1 mr-auto">
-                        <!-- Closed Card  -->
-                        <i class="fas fa-angle-down"></i>
-                      </div>
-                    </div>
-
-                  </a>
-                </div>
-
-                <div id="collapseMobile2" class="panel-collapse collapse px-3" aria-labelledby="headingMobile2"
-                  data-parent="#accordionMobile">
-                  <div class="card-body ml-2">
-                    <div class="topic">
-                      <input type="checkbox" class="form-check-input" id="video3" checked disabled>
-                      <label class="form-check-label" for="video3">3. Getting Started with Python</label>
-                      <p><i class="far fa-play-circle pr-2" aria-hidden="true"></i>4 min</p>
-                    </div>
-                    <div class="topic">
-                      <input type="checkbox" class="form-check-input" id="video4" checked disabled>
-                      <label class="form-check-label" for="video4">4. Variables and Multiple Assignment</label>
-                      <p><i class="far fa-play-circle pr-2" aria-hidden="true"></i>4 min</p>
-                    </div>
-                    <div class="topic">
-                      <input type="checkbox" class="form-check-input" id="video5" disabled>
-                      <label class="form-check-label" for="video5">5. Placeholders in Strings</label>
-                      <p><i class="far fa-play-circle pr-2" aria-hidden="true"></i>4 min</p>
-                    </div>
-                    <div class="topic">
-                      <input type="checkbox" class="form-check-input" id="video6" disabled>
-                      <label class="form-check-label" for="video6">6. Introduction to Lists</label>
-                      <p><i class="far fa-play-circle pr-2" aria-hidden="true"></i>4 min</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!-- Chapter 3  -->
-              <div class="card">
-                <div class="card-header panel-title pt-3" id="headingMobile3">
-
-                  <a class="collapsed" role="button" title="" data-toggle="collapse" data-parent="#accordionMobile"
-                    href="#collapseMobile3" aria-expanded="false" aria-controls="collapseMobile3">
-                    <div class="row px-3">
-                      <div class="col-10 col-md-11">
-                        <h6>
-                          Section 3: Thank You!
-                        </h6>
-                        <p class="time">1 / 2 | 1min</p>
-                      </div>
-                      <div class="col-2 col-md-1 mr-auto">
-                        <!-- Closed Card  -->
-                        <i class="fas fa-angle-down"></i>
-                      </div>
-                    </div>
-
-                  </a>
-                </div>
-
-                <div id="collapseMobile3" class="panel-collapse collapse px-3" aria-labelledby="headingMobile3"
-                  data-parent="#accordionMobile">
-                  <div class="card-body ml-2">
-                    <div class="topic">
-                      <input type="checkbox" class="form-check-input" id="video3" disabled>
-                      <label class="form-check-label" for="video7">7. What's next?</label>
-                      <p><i class="far fa-play-circle pr-2" aria-hidden="true"></i>4 min</p>
-                    </div>
-
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- Q&A -->
-          <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-            <div class="row">
-              <div class="col-12 mx-0">
-                <div class="input-group">
-                  <input type="text" class="form-control mysearch" placeholder="Search all course questions"
-                    aria-label="Username" aria-describedby="basic-addon1">
-                  <div class="input-group-append">
-                    <span class="input-group-text" id="basic-addon1"><i class="fa fa-search"
-                        style="font-size:20px"></i></span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="row mt-5 justify-content-between">
-              <div class="col-6 col-md-4 d-none d-md-block">
-                <div class="dropdown show">
-                  <a class="btn btn-block btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    All lectures
-                  </a>
-
-                  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                    <a class="dropdown-item" href="#">All lectures</a>
-                    <a class="dropdown-item" href="#">Current lecture</a>
-                  </div>
-                </div>
-              </div>
-              <div class="col-6 col-md-4 d-none d-md-block">
-                <div class="dropdown show">
-                  <a class="btn btn-block btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Sort by most recent
-                  </a>
-
-                  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                    <a class="dropdown-item" href="#">Sort by most recent</a>
-                    <a class="dropdown-item" href="#">Sort by most update</a>
-                    <a class="dropdown-item" href="#">Sort by recommended</a>
-                  </div>
-                </div>
-              </div>
-              <div class="col-6 col-md-4">
-                <div class="dropdown show">
-                  <a class="btn btn-block btn-primary dropdown-toggle px-1" href="#" role="button" id="dropdownMenuLink"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Filter questions
-                  </a>
-
-                  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                    <a class="dropdown-item" href="#">Questions I'm following</a>
-                    <a class="dropdown-item" href="#">Questions I asked</a>
-                    <a class="dropdown-item" href="#">Questions I asked</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="row mt-5 ml-2">
-              <div class="col-md-12">
-                <h6 class="mb-3">{{questions.count}} questions in this course
-                </h6>
-                <hr>
-                <!-- Questions  -->
-                {% for i in questions %}
-                <div class="row mt-2 no-gutters">
-                  <div class="col-md-1">
-                    <img class="heroImg" src="{{i.user.display_pic.url}}" width="50px">
-                  </div>
-                  <div class="col-md-11">
-                    <h6> {{i.question}}</h6>
-                    <p>{{i.user}} · {{i.created_at}}</p>
-                    {% for j in i.answers.all %}
-                    <p>{{j.answer}}
-                    </p>
-                    <p>{{j.user}} · {{j.created_at}}</p>
-                    {% endfor %}
-                    
-                  </div>
-
-                </div>
-                {% endfor %}
-                
-                
+          <div id="collapse1" class="panel-collapse show px-3 collapse" aria-labelledby="heading1">
+            <div class="card-body ml-2">
+              {% for j in i.lesson_set.all %}
+              <div class="topic align-items-center">
+                <input type="checkbox" class="form-check-input styled" id="video1" checked disabled>
+                <label class="form-check-label align-self-center" for="video1" id="playBtn{{j.id}}">{{forloop.counter}}.
+                  {{j.lesson}}</label>
                 <div class="row">
+                  <div class="col-6">
+                    <p><i class="far fa-play-circle pr-2" aria-hidden="true"></i>{{j.duration}} min</p>
+                  </div>
+                  <div class="col-4">
+                    <p>Material <i class="fas fa-file-pdf"></i></p>
+                  </div>
+                  <div class="col-2">
+                    <i class="fas fa-unlock"></i>
+                  </div>
+                </div>
+                <script>
+  $("#playBtn{{j.id}}").click(function () {
+    //var videoID = "8N5rRU6JjFY";
+    $("#video")[0].src = 'https://youtube.com/embed/{{j.video_id}}?autoplay=1';
+  })
+</script>
+
+              </div>
+              <div class="row">
+                <a href="#">
                   <div class="col-12">
-                    <button class="btn btn-block btn-primary">See More</button>
+                    <hr>
+                    <p><i class="fas fa-clipboard-check"></i> Take Quiz</p>
+                  </div>
+                </a>
+
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+        {% else %}
+
+        <!-- Chapter 2  -->
+        <div class="card">
+          <div class="card-header panel-title pt-3" id="heading2">
+
+            <a class="collapsed" role="button" title="" data-toggle="collapse" href="#collapse{{i.id}}"
+              aria-expanded="false" aria-controls="collapse2" data-parent="#accordion">
+              <div class="row px-3">
+                <div class="col-10 col-md-11">
+                  <h6>
+                    Section {{forloop.counter}}: {{i.module}}
+                  </h6>
+                  <p class="time">{{i.duration}}min</p>
+                </div>
+                <div class="col-2 col-md-1 mr-auto">
+                  <!-- Closed Card  -->
+                  <i class="fas fa-angle-down"></i>
+                </div>
+              </div>
+
+            </a>
+          </div>
+
+          <div id="collapse{{i.id}}" class="panel-collapse collapse px-3" aria-labelledby="heading2">
+            <div class="card-body ml-2">
+              {% for j in i.lesson_set.all %}
+              <div class="topic">
+                <input type="checkbox" class="form-check-input" id="video3" disabled>
+                <label class="form-check-label" for="video3" id="playBtn{{j.id}}">{{forloop.counter}}. {{j.lesson}}</label>
+                <div class="row">
+                  <div class="col-6">
+                    <p><i class="far fa-play-circle pr-2" aria-hidden="true"></i>{{j.duration}} min</p>
+                  </div>
+                  <div class="col-4">
+                    <p>Material <i class="fas fa-file-pdf"></i></p>
+                  </div>
+                  <div class="col-2">
+                    <i class="fas fa-lock"></i>
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-          <!-- Announcements -->
-          <div class="tab-pane fade" id="pills-anno" role="tabpanel" aria-labelledby="pills-anno-tab">
-            <div class="row mt-5">
-              <div class="col-md-1 m-3">
-                <img class="heroImg" src="{{request.user.display_pic.url}}" width="50px">
-              </div>
-              <div class="col-md-10 mt-3">
-                
-                <form class="p-3 p-lg-4" method="post" action="">
-    {% csrf_token %}
-     {% include 'bs4_form_label.html' with form=form %}
-    <input class="btn  btn-primary btn-block form-button" type="submit" value="Ask" />
-  
-</form>
+              <script>
+  $("#playBtn{{j.id}}").click(function () {
+    //var videoID = "8N5rRU6JjFY";
+    $("#video")[0].src = 'https://youtube.com/embed/{{j.video_id}}?autoplay=1';
+  })
+</script>
 
+              {% endfor %}
+              <div class="row">
+                <a href="#">
+                  <div class="col-12">
+                    <hr>
+                    <p><i class="fas fa-clipboard-check"></i> Take Quiz</p>
+                  </div>
+                </a>
 
               </div>
-
             </div>
-
           </div>
         </div>
+
+        {% endif %}
+        {% endfor %}
+        <!-- Chapter 3  -->
+
       </div>
-  </section>
+    </div>
+    <!-- Video  -->
+    <div class="col-12 col-lg-8 px-0 pt-3 py-2 mt-0 ml-lg-auto">
 
+      <div class="embed-responsive embed-responsive-16by9">
+        <iframe id="video" width="640" height="360" src="https://www.youtube.com/embed/${videoID}?enablejsapi=1"
+          frameborder="0" style="border: solid 4px #37474F"></iframe>
+        <!-- <iframe width="560" height="315" src="https://youtube.com/embed/8N5rRU6JjFY?enablejsapi=1" frameborder="0"
+          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+          class="embed-responsive-item px-3" allowfullscreen id="video" style="border: solid 4px #37474F"></iframe>
+           -->
 
-  <!-- tab menus  -->
-  <section class="container-fluid">
-    <div class="row mt-3">
+      </div>
 
     </div>
 
-  </section>
-  <!-- script  -->
-  <script src="https://kit.fontawesome.com/a01bd6bffe.js" crossorigin="anonymous"></script>
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-    crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-    crossorigin="anonymous"></script>
-  <script type="text/javascript" src="js/bootstrap.min.js"></script>
 
-  <script>
-    // Profile Menu Functionality 
-    // Toggle Functionality 
-    $(".panel-collapse.collapse.show").each(function () {
-      $(this).prev(".card-header").find(".fas").addClass("fa-angle-down").removeClass("fa-angle-up");
-    });
-    // Toggle plus minus icon on show hide of collapse element
-    $(".panel-collapse.collapse").on('show.bs.collapse', function () {
-      $(this).prev(".card-header").find(".fas").removeClass("fa-angle-down").addClass("fa-angle-up");
-    }).on('hide.bs.collapse', function () {
-      $(this).prev(".card-header").find(".fas").removeClass("fa-angle-up").addClass("fa-angle-down");
-    });
+    <!-- Course Tabs Section  -->
+    <div class="col-12 col-lg-8 ml-lg-auto course-tabs">
+      <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab"
+            aria-controls="pills-home" aria-selected="true">Overview</a>
+        </li>
+        <li class="nav-item d-block d-lg-none">
+          <a class="nav-link" id="pills-content-tab" data-toggle="pill" href="#pills-content" role="tab"
+            aria-controls="pills-content" aria-selected="true">Course Content</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab"
+            aria-controls="pills-profile" aria-selected="false">Q&A</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="pills-anno-tab" data-toggle="pill" href="#pills-anno" role="tab"
+            aria-controls="pills-anno" aria-selected="false">Ask A Question</a>
+        </li>
+      </ul>
 
-    // Side bar scriptng 
-    var elementPosition = $('#courseContent').offset();
+      <div class="tab-content px-2 px-md-5" id="pills-tabContent">
+        <!-- Overview -->
+        <div class="tab-pane fade show active text-justify" id="pills-home" role="tabpanel"
+          aria-labelledby="pills-home-tab">
+          <div class="row">
+            <div class="col-12">
+              <div class="about">
+                <h4>About this course</h4>
+                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Repudiandae facere quas, fugit nam, illum
+                  ullam vero, quos ducimus necessitatibus molestias veniam labore ab delectus voluptatum autem magnam
+                  earum sit obcaecati culpa numquam. Itaque quo maxime facere facilis quibusdam natus doloremque!</p>
+              </div>
+              <hr class="mt-3 mb-3">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <h4>By the numbers</h4>
+            </div>
+            <div class="col-md-4">
+              <p>Skill level: Beginner Level</p>
+              <p>Students: 535072</p>
+              <p>Languages: English</p>
+              <p>Captions: Yes</p>
+            </div>
+            <div class="col-md-4">
+              <p>Lectures: 28</p>
+              <p>Video: 2.5 total hours</p>
+            </div>
+          </div>
+          <hr class="mt-3 mb-3">
+          <div class="Description">
+            <div class="row">
+              <div class="col-md-4">
+                <h4>Description</h4>
+              </div>
+              <div class="col-md-8">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit magnam unde laudantium, autem
+                  provident veritatis facere quis hic nam atque sunt porro, distinctio labore odit nostrum in,
+                  necessitatibus et. Natus cum exercitationem, libero aut suscipit expedita autem? Iusto accusantium
+                  sint aperiam? Explicabo laboriosam facilis iusto at dolore quod hic suscipit. Consequuntur
+                  dignissimos repellat, fugiat mollitia eum laborum quidem accusantium expedita perspiciatis placeat,
+                  provident iure, maxime debitis eius esse minima aspernatur. Optio officia quod quam quos eos ad
+                  pariatur, officiis sunt!</p>
+              </div>
+            </div>
+          </div>
+          <hr class="mt-3 mb-3">
+          <div class="Instructor">
+            <div class="row">
+              <div class="col-md-4">
+                <h4>Instructor</h4>
+              </div>
+              <div class="col-md-8">
+                <div class="row text-center">
+                  <div class="col-md-4">
+                    <img class="heroImg" src="{% static 'img/hero01.jpg' %}">
+                  </div>
 
-    $(window).scroll(function () {
-      if ($(window).scrollTop() > elementPosition.top) {
-        $('#courseContent').css('position', 'fixed').css('top', '0');
-      } else {
-        $('#courseContent').css('position', 'static');
+                  <div class="col-md-8 mt-4">
+                    <h6>Avinash Jain</h6>
+                    <p>Python Trainer</p>
+                  </div>
+                </div>
+
+                <p class="mt-3"> Avinash Jain is currently a sophomore at UC Berkeley majoring in Electrical
+                  Engineering and
+                  Computer Science. He's the CEO and Founder of TheCodex, an online educational platform focused on
+                  bringing the best programming content to hundreds of thousands of students around the world.
+
+                  His programming journey began at the age of 10, starting off with simple Python scripts to crawl the
+                  weather. Since then, he's worked at numerous companies and is professionally experienced in Python,
+                  iOS Development and Web Development. He's launched a plethora of applications in the App Store
+                  amassing thousands of downloads. Additionaly, he's competed and won in several hackathons around the
+                  world including PennApps and NWHacks.
+
+                  Avinash has a passion to teach - his enthusiasm and love for programming is evident in every video.
+                  For the past 4 years he's been an instructor on Udemy and he loves motivating and enabling others to
+                  pursue their programming dreams. He hopes to help students realize the power of programming and
+                  jumpstart their careers through his courses.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Course Content  -->
+        <div class="tab-pane fade" id="pills-content" role="tabpanel" aria-labelledby="pills-content-tab">
+          <!-- Mobile Content View  -->
+          <div id="accordionMobile" class="">
+            <!-- Chapter 1  -->
+            <div class="card">
+              <div class="card-header panel-title pt-3" id="headingMobile1">
+
+                <a class="collapsed" role="button" title="" data-toggle="collapse" data-parent="#accordionMobile"
+                  href="#collapseMobile1" aria-expanded="false" aria-controls="collapseMobile1">
+                  <div class="row px-3">
+                    <div class="col-10 col-md-11">
+                      <h6>
+                        Section 1: Up And Running With Python
+                      </h6>
+                      <p class="time">1 / 2 | 2min</p>
+                    </div>
+                    <div class="col-2 col-md-1 mr-auto">
+                      <!-- Closed Card  -->
+                      <i class="fas fa-angle-up"></i>
+                    </div>
+                  </div>
+
+                </a>
+              </div>
+
+              <div id="collapseMobile1" class="panel-collapse collapse show px-3" aria-labelledby="headingMobile1"
+                data-parent="#accordionMobile">
+                <div class="card-body ml-2">
+                  <div class="topic">
+                    <input type="checkbox" class="form-check-input styled" id="video1" checked disabled>
+                    <label class="form-check-label" for="video1">1. Welcome!</label>
+                    <p><i class="far fa-play-circle pr-2" aria-hidden="true"></i>4 min</p>
+                  </div>
+                  <div class="topic">
+                    <input type="checkbox" class="form-check-input" id="video2" checked disabled>
+                    <label class="form-check-label" for="video2">2. Quick Resource to Jumpstart your Python
+                      Programming Journey</label>
+                    <p><i class="far fa-play-circle pr-2" aria-hidden="true"></i>4 min</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Chapter 2  -->
+            <div class="card">
+              <div class="card-header panel-title pt-3" id="headingMobile2">
+
+                <a class="collapsed" role="button" title="" data-toggle="collapse" data-parent="#accordionMobile"
+                  href="#collapseMobile2" aria-expanded="false" aria-controls="collapseMobile2">
+                  <div class="row px-3">
+                    <div class="col-10 col-md-11">
+                      <h6>
+                        Section 2: All the Basics(New)
+                      </h6>
+                      <p class="time">3 / 4 | 16min</p>
+                    </div>
+                    <div class="col-2 col-md-1 mr-auto">
+                      <!-- Closed Card  -->
+                      <i class="fas fa-angle-down"></i>
+                    </div>
+                  </div>
+
+                </a>
+              </div>
+
+              <div id="collapseMobile2" class="panel-collapse collapse px-3" aria-labelledby="headingMobile2"
+                data-parent="#accordionMobile">
+                <div class="card-body ml-2">
+                  <div class="topic">
+                    <input type="checkbox" class="form-check-input" id="video3" checked disabled>
+                    <label class="form-check-label" for="video3">3. Getting Started with Python</label>
+                    <p><i class="far fa-play-circle pr-2" aria-hidden="true"></i>4 min</p>
+                  </div>
+                  <div class="topic">
+                    <input type="checkbox" class="form-check-input" id="video4" checked disabled>
+                    <label class="form-check-label" for="video4">4. Variables and Multiple Assignment</label>
+                    <p><i class="far fa-play-circle pr-2" aria-hidden="true"></i>4 min</p>
+                  </div>
+                  <div class="topic">
+                    <input type="checkbox" class="form-check-input" id="video5" disabled>
+                    <label class="form-check-label" for="video5">5. Placeholders in Strings</label>
+                    <p><i class="far fa-play-circle pr-2" aria-hidden="true"></i>4 min</p>
+                  </div>
+                  <div class="topic">
+                    <input type="checkbox" class="form-check-input" id="video6" disabled>
+                    <label class="form-check-label" for="video6">6. Introduction to Lists</label>
+                    <p><i class="far fa-play-circle pr-2" aria-hidden="true"></i>4 min</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Chapter 3  -->
+            <div class="card">
+              <div class="card-header panel-title pt-3" id="headingMobile3">
+
+                <a class="collapsed" role="button" title="" data-toggle="collapse" data-parent="#accordionMobile"
+                  href="#collapseMobile3" aria-expanded="false" aria-controls="collapseMobile3">
+                  <div class="row px-3">
+                    <div class="col-10 col-md-11">
+                      <h6>
+                        Section 3: Thank You!
+                      </h6>
+                      <p class="time">1 / 2 | 1min</p>
+                    </div>
+                    <div class="col-2 col-md-1 mr-auto">
+                      <!-- Closed Card  -->
+                      <i class="fas fa-angle-down"></i>
+                    </div>
+                  </div>
+
+                </a>
+              </div>
+
+              <div id="collapseMobile3" class="panel-collapse collapse px-3" aria-labelledby="headingMobile3"
+                data-parent="#accordionMobile">
+                <div class="card-body ml-2">
+                  <div class="topic">
+                    <input type="checkbox" class="form-check-input" id="video3" disabled>
+                    <label class="form-check-label" for="video7">7. What's next?</label>
+                    <p><i class="far fa-play-circle pr-2" aria-hidden="true"></i>4 min</p>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Q&A -->
+        <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+          <div class="row">
+            <div class="col-12 mx-0">
+              <div class="input-group">
+                <input type="text" class="form-control mysearch" placeholder="Search all course questions"
+                  aria-label="Username" aria-describedby="basic-addon1">
+                <div class="input-group-append">
+                  <span class="input-group-text" id="basic-addon1"><i class="fa fa-search"
+                      style="font-size:20px"></i></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mt-5 justify-content-between">
+            <div class="col-6 col-md-4 d-none d-md-block">
+              <div class="dropdown show">
+                <a class="btn btn-block btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  All lectures
+                </a>
+
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                  <a class="dropdown-item" href="#">All lectures</a>
+                  <a class="dropdown-item" href="#">Current lecture</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-6 col-md-4 d-none d-md-block">
+              <div class="dropdown show">
+                <a class="btn btn-block btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Sort by most recent
+                </a>
+
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                  <a class="dropdown-item" href="#">Sort by most recent</a>
+                  <a class="dropdown-item" href="#">Sort by most update</a>
+                  <a class="dropdown-item" href="#">Sort by recommended</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-6 col-md-4">
+              <div class="dropdown show">
+                <a class="btn btn-block btn-primary dropdown-toggle px-1" href="#" role="button" id="dropdownMenuLink"
+                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Filter questions
+                </a>
+
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                  <a class="dropdown-item" href="#">Questions I'm following</a>
+                  <a class="dropdown-item" href="#">Questions I asked</a>
+                  <a class="dropdown-item" href="#">Questions I asked</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mt-5 ml-2">
+            <div class="col-md-12">
+              <h6 class="mb-3">{{questions.count}} questions in this course
+              </h6>
+              <hr>
+              <!-- Questions  -->
+              {% for i in questions %}
+              <div class="row mt-2 no-gutters">
+                <div class="col-md-1">
+                  <img class="heroImg" src="{{i.user.display_pic.url}}" width="50px">
+                </div>
+                <div class="col-md-11">
+                  <h6> {{i.question}}</h6>
+                  <p>{{i.user}} · {{i.created_at}}</p>
+                  {% for j in i.answers.all %}
+                  <p>{{j.answer}}
+                  </p>
+                  <p>{{j.user}} · {{j.created_at}}</p>
+                  {% endfor %}
+
+                </div>
+
+              </div>
+              {% endfor %}
+
+
+              <div class="row">
+                <div class="col-12">
+                  <button class="btn btn-block btn-primary">See More</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Announcements -->
+        <div class="tab-pane fade" id="pills-anno" role="tabpanel" aria-labelledby="pills-anno-tab">
+          <div class="row mt-5">
+            <div class="col-md-1 m-3">
+              <img class="heroImg" src="{{request.user.display_pic.url}}" width="50px">
+            </div>
+            <div class="col-md-10 mt-3">
+
+              <form class="p-3 p-lg-4" method="post" action="">
+                {% csrf_token %}
+                {% include 'bs4_form_label.html' with form=form %}
+                <input class="btn  btn-primary btn-block form-button" type="submit" value="Ask" />
+
+              </form>
+
+
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+</section>
+
+
+<!-- tab menus  -->
+<section class="container-fluid">
+  <div class="row mt-3">
+
+  </div>
+
+</section>
+<!-- script  -->
+<script src="https://kit.fontawesome.com/a01bd6bffe.js" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+  integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+  integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+
+
+<script type="text/javascript">
+  var tag = document.createElement('script');
+  tag.id = 'iframe-demo';
+  tag.src = 'https://www.youtube.com/iframe_api';
+  var firstScriptTag = document.getElementsByTagName('script')[0];
+  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+  var player;
+  function onYouTubeIframeAPIReady() {
+    player = new YT.Player('video', {
+      events: {
+        'onReady': onPlayerReady,
+        'onStateChange': onPlayerStateChange
       }
     });
+  }
+  function onPlayerReady(event) {
+    document.getElementById('video').style.borderColor = '#FF6D00';
+  }
+  function changeBorderColor(playerStatus) {
+    var color;
+    if (playerStatus == -1) {
+      color = "#37474F"; // unstarted = gray
+    } else if (playerStatus == 0) {
+      color = "#FFFF00"; // ended = yellow
+    } else if (playerStatus == 1) {
+      color = "#33691E"; // playing = green
+    } else if (playerStatus == 2) {
+      color = "#DD2C00"; // paused = red
+    } else if (playerStatus == 3) {
+      color = "#AA00FF"; // buffering = purple
+    } else if (playerStatus == 5) {
+      color = "#FF6DOO"; // video cued = orange
+    }
+    if (color) {
+      document.getElementById('video').style.borderColor = color;
+    }
+  }
+  function onPlayerStateChange(event) {
+    changeBorderColor(event.data);
+  }
+</script>
+<script>
+  // Profile Menu Functionality 
+  // Toggle Functionality 
+  $(".panel-collapse.collapse.show").each(function () {
+    $(this).prev(".card-header").find(".fas").addClass("fa-angle-down").removeClass("fa-angle-up");
+  });
+  // Toggle plus minus icon on show hide of collapse element
+  $(".panel-collapse.collapse").on('show.bs.collapse', function () {
+    $(this).prev(".card-header").find(".fas").removeClass("fa-angle-down").addClass("fa-angle-up");
+  }).on('hide.bs.collapse', function () {
+    $(this).prev(".card-header").find(".fas").removeClass("fa-angle-up").addClass("fa-angle-down");
+  });
+
+  // Side bar scriptng 
+  // var elementPosition = $('#courseContent').offset();
+
+  // $(window).scroll(function () {
+  //   if ($(window).scrollTop() > elementPosition.top) {
+  //     $('#courseContent').css('position', 'fixed').css('top', '0');
+  //   } else {
+  //     $('#courseContent').css('position', 'static');
+  //   }
+  // });
 
 
-  </script>
+
+  function sticky_relocate() {
+    var window_top = $(window).scrollTop();
+    var footer_top = $(".student").offset().top;
+    var div_top = $('#sticky-anchor').offset().top;
+    var div_height = $("#courseContent").height();
+    var padding = 20;
+
+    if (window_top + div_height > footer_top - padding)
+        $('#courseContent').css({top: (window_top + div_height - footer_top + padding) * -1})
+    else if (window_top > div_top) {
+        $('#courseContent').addClass('sticked');
+        $('#courseContent').css({top: 0})
+    } else {
+        $('#courseContent').removeClass('sticked');
+    }
+}
+
+  $(function () {
+    $(window).scroll(sticky_relocate);
+    sticky_relocate();
+  });
+</script>
 {% endblock %}

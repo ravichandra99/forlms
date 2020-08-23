@@ -60,17 +60,17 @@ class Course(models.Model):
 	title = models.CharField(max_length = 100)
 	short_description = models.TextField()
 	description = models.TextField()
-	video_id = models.CharField(max_length = 20,default = 'XdhdBlPnpCw')
+	video_id = models.CharField(max_length = 20,default = 'XdhdBlPnpCw',verbose_name = "Introduction Video ID")
 	img1240x600 = models.ImageField(upload_to = '')
 	img293x274 = models.ImageField(upload_to = '',verbose_name = 'img380x256')
 	duration = models.CharField(max_length = 10)
 	credits = models.IntegerField()
-	reviews = models.FloatField()
+	reviews = models.FloatField(verbose_name = 'rating')
 	enrolled = models.IntegerField()
 	slug = models.SlugField()
-	offer_price = models.FloatField()
-	original_price = models.FloatField()
-	tags = models.TextField()
+	offer_price = models.IntegerField()
+	original_price = models.IntegerField()
+	tags = models.TextField(verbose_name = 'Key Skills')
 
 
 	def __str__(self):

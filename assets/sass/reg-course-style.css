@@ -21,10 +21,7 @@
   border-color: transparent;
   cursor: pointer;
 }
-#videoSection .sidebar
-{
-  z-index: -1 ! important;
-}
+
 .card-header {
   padding: 0px;
   text-align: left;
@@ -42,7 +39,6 @@ p.time {
 .heroImg {
   border-radius: 50%;
 }
-
 
 .allpad {
   margin-left: 12%;
@@ -64,7 +60,7 @@ p.time {
 }
 
 #videoSection .topic input[type="checkbox"]:disabled + label {
-  opacity: 1.0;
+  opacity: 1;
 }
 
 #videoSection #chapters {
@@ -80,13 +76,19 @@ p.time {
     bottom: 0;
     left: 0;
     display: block;
-    overflow-x: hidden;
-    overflow-y: auto;
     /* Scrollable contents if viewport is shorter than content. */
     background-color: white;
     border-right: 1.5px solid #eee;
     border-top: 1.5px solid #eee;
     height: 100% !important;
+  }
+  #videoSection .sidebar #accordion {
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: 95% !important;
+  }
+  #videoSection .sidebar h4 {
+    border-bottom: 1.5px solid;
   }
 }
 
@@ -108,8 +110,18 @@ p.time {
   text-decoration: none;
 }
 
+.profile-icon {
+  border: 2px solid #ff9f00;
+  background-color: #ff9f00;
+  -webkit-box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.2);
+          box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.2);
+  border-radius: 50px;
+  padding: 10px;
+}
 
-
+.profile-icon h4 {
+  margin: 0px;
+}
 
 @media (max-width: 767px) {
   h2 {
@@ -134,7 +146,7 @@ p.time {
 
 [type="checkbox"]:not(:checked) + label:before,
 [type="checkbox"]:checked + label:before {
-  content: '';
+  content: "";
   position: absolute;
   left: 0;
   top: 0;
@@ -150,16 +162,16 @@ p.time {
 
 [type="checkbox"]:not(:checked) + label:after,
 [type="checkbox"]:checked + label:after {
-  content: '\2714\0020';
+  content: "\2714\0020";
   position: absolute;
-  top: .15em;
-  left: .22em;
+  top: 0.15em;
+  left: 0.22em;
   font-size: 1.3em;
   line-height: 0.8;
   color: black;
-  -webkit-transition: all .2s;
-  transition: all .2s;
-  font-family: 'Lucida Sans Unicode', 'Arial Unicode MS', Arial;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+  font-family: "Lucida Sans Unicode", "Arial Unicode MS", Arial;
 }
 
 [type="checkbox"]:not(:checked) + label:after {
@@ -201,5 +213,20 @@ label:hover:before {
 
 .form-check-input:disabled ~ .form-check-label {
   color: black !important;
+}
+
+.fa-file-pdf {
+  color: #f15642 !important;
+}
+
+.fa-unlock {
+  color: #04a83b !important;
+}
+
+.sticked {
+  position: fixed !important;
+  top: 0;
+  z-index: 10;
+  border-radius: 0 0;
 }
 /*# sourceMappingURL=reg-course-style.css.map */
