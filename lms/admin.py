@@ -22,6 +22,6 @@ admin.site.register(Trainer)
 admin.site.register(FAQ)
 admin.site.register(Question)
 admin.site.register(Answer)
-
+admin.site.register(CourseStatus)
 
 admin.site.register(Course, CourseAdmin)

@@ -62,7 +62,7 @@ class Course(models.Model):
 	description = models.TextField()
 	video_id = models.CharField(max_length = 20,default = 'XdhdBlPnpCw',verbose_name = "Introduction Video ID")
 	img1240x600 = models.ImageField(upload_to = '')
-	img293x274 = models.ImageField(upload_to = '',verbose_name = 'img380x256')
+	img293x274 = models.ImageField(upload_to = '',verbose_name = 'img240x135')
 	duration = models.CharField(max_length = 10)
 	credits = models.IntegerField()
 	reviews = models.FloatField(verbose_name = 'rating')
